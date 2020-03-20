@@ -30,6 +30,19 @@
                     left: 0.0%;
                     top: 0.0%;
                 }
+                
+                .info {
+                    padding: 6px 8px;
+                    font: 14px/16px Arial, Helvetica, sans-serif;
+                    background: white;
+                    background: rgba(255,255,255,0.8);
+                    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                    border-radius: 5px;
+                }
+                .info h4 {
+                    margin: 0 0 5px;
+                    color: #777;
+                }
             </style>
         
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
@@ -54,12 +67,28 @@
             L.control.scale().addTo(map_dcac5127984c4878bc138d966db985cd);
 
             
+            var info = L.control({position: 'topright'});
 
+            info.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                this.update();
+                return this._div;
+            };
+            
+            // method that we will use to update the control based on feature properties passed
+            //  'NIMI', '60_yle','60yle_osak'
+            info.update = function (props) {
+                this._div.innerHTML = '<h4>KOV info</h4>' +  (props ?
+                    '<b>' + props.NIMI + '</b><br />' + props['60_yle'] + ' 60-aastaste ja vanemate üldine (' + props['60yle_osak'] + '%)'
+                    : 'liigu üle');
+            };
+            
+            info.addTo(map_dcac5127984c4878bc138d966db985cd);
         
     
             var tile_layer_72147a38ee5e487c9bd41ad2a842c9b0 = L.tileLayer(
                 "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
-                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, Eesti Statiska \u003ca href =\"https://www.stat.ee/\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
             ).addTo(map_dcac5127984c4878bc138d966db985cd);
         
     
@@ -86,15 +115,18 @@
             switch(feature.id) {
                 default:
                     return {"fillOpacity": 0.8, "weight": 3};
-            }
+            };
+            
         }
         function geo_json_7b94c7c0e6e94b1b985de65581d59adc_onEachFeature(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     geo_json_7b94c7c0e6e94b1b985de65581d59adc.resetStyle(e.target);
+                    info.update();
                 },
                 mouseover: function(e) {
                     e.target.setStyle(geo_json_7b94c7c0e6e94b1b985de65581d59adc_highlighter(e.target.feature));
+                    info.update(e.target.feature.properties);
                 },
                 click: function(e) {
                     map_dcac5127984c4878bc138d966db985cd.fitBounds(e.target.getBounds());
@@ -121,7 +153,7 @@
               .domain([10.962, 36.7633])
               .range([0, 400]);
 
-    color_map_634b70140ebe4dab98d9a951290b3044.legend = L.control({position: 'topright'});
+    color_map_634b70140ebe4dab98d9a951290b3044.legend = L.control({position: 'bottomright'});
     color_map_634b70140ebe4dab98d9a951290b3044.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
     color_map_634b70140ebe4dab98d9a951290b3044.legend.addTo(map_dcac5127984c4878bc138d966db985cd);
 
