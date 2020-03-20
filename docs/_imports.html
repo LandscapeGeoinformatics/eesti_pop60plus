@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <meta property="og:title" content="Eestis 60-aastaste ja vanemate osakaal rahvastikust">
+    <meta property="og:description"
+        content="60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga">
+    <meta property="og:image" content="https://landscapegeoinformatics.github.io/eesti_pop60plus/thumb.png">
+    <meta property="og:url" content="https://landscapegeoinformatics.github.io/eesti_pop60plus/index.html">
+
+    <meta name="twitter:title" content="Eestis 60-aastaste ja vanemate osakaal rahvastikust ">
+    <meta name="twitter:description"
+        content="60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga">
+    <meta name="twitter:image" content="https://landscapegeoinformatics.github.io/eesti_pop60plus/thumb.png">
+    <meta name="twitter:card" content="60-aastaste ja vanemate osakaal rahvastikust (%)">
+
+
+    <style>
+        #map {
+            padding: 6px 8px;
+        }
+
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125318812-6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-125318812-6');
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid" role="main">
+        <div class="page-header">
+            <h2>60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga</h2>
+        </div>
+
+        <div class="row" style="padding: 4px 10px;">
+
+            <div class="folium-map" id="map"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <p>
+                    Kaart: Alexander Kmoch ja Evelyn Uuemaa, <a href="https://www.geograafia.ut.ee/et"
+                        target="blank">Tartu Ülikooli geograafia osakond</a>
+                </p>
+                <p>
+                    Andmed: <a href="https://www.stat.ee/" target='blank'>Eesti Statistikaamet</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+<script>
+    var info = L.control({ position: 'topright' });
+
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+
+    // method that we will use to update the control based on feature properties passed
+    //  'NIMI', '60_yle','60yle_osak'
+    // 60-aastaste ja vanemate arv [number here]
+    // 60-aastaste ja vanemate osakaal rahvastikust [percentage here]
+    info.update = function (props) {
+        this._div.innerHTML = (props ? '<b>' + props.NIMI + '</b><br />' +
+            '60-aastaste ja vanemate arv: ' + props['60_yle'] + '<br />60-aastaste ja vanemate osakaal rahvastikust: ' + props['60yle_osak'].toFixed(1) + '%'
+            : 'liigu hiirega KOV-ile');
+    };
+
+    info.addTo(map);
+
+    
+    var tile_layer = L.tileLayer(
+        "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+        { "attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, Eesti Statiska \u003ca href =\"https://www.stat.ee/\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false }
+    ).addTo(map);
+
+    function geo_json_onEachFeature(feature, layer) {
+        layer.on({
+            mouseout: function (e) {
+                info.update();
+            },
+            mouseover: function (e) {
+                info.update(e.target.feature.properties);
+            }
+        });
+    };
+
+    color_map.legend = L.control({ position: 'bottomright' });
+</script>
