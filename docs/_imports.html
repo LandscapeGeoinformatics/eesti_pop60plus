@@ -117,4 +117,60 @@
     };
 
     color_map.legend = L.control({ position: 'bottomright' });
+
+    // --------------------------------------
+
+    var info2 = L.control({ position: 'topright' });
+
+    info2.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info2'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+
+    info2.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info2'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+
+    // method that we will use to update the control based on feature properties passed
+    // '60yle', '60yle_prop','covid19_03', 'co_19_03_p'
+    info2.update = function (props) {
+        var cov_test = 0;
+        if (props) {
+            cov_test = 100 / props['pop_total'] * props['covid20_03'];
+        }
+
+        this._div.innerHTML = (props ? '<b>' + props.NIMI + '</b><br />' +
+            '60-aastaste ja vanemate arv: ' + props['60yle'] + '<br />60-aastaste ja vanemate osakaal rahvastikust: ' + props['60yle_prop'].toFixed(1) + '%<br />' + 'COVID-19 nakatunute arv: ' + props['covid20_03'] + '<br />COVID-19 nakatunute osakaal rahvastikust: ' + cov_test.toFixed(2) + '%<br />'
+            : 'liigu hiirega maakonnale');
+    };
+
+    info2.addTo(map_c8d50750b3004dfd81b1b4494d0ce815);
+
+    var tile_layer_078c1ae2a4a74d7ebeb0d975f37348b6 = L.tileLayer(
+        "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+        { "attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, Eesti Statiska \u003ca href =\"https://www.stat.ee/\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false }
+    ).addTo(map_c8d50750b3004dfd81b1b4494d0ce815);
+
+    function geo_json_c21755fb61ee445d9bcd69df86a6033a_onEachFeature(feature, layer) {
+        layer.on({
+            mouseout: function (e) {
+                geo_json_c21755fb61ee445d9bcd69df86a6033a.resetStyle(e.target);
+                info2.update();
+            },
+            mouseover: function (e) {
+                e.target.setStyle(geo_json_c21755fb61ee445d9bcd69df86a6033a_highlighter(e.target.feature));
+                info2.update(e.target.feature.properties);
+            },
+            click: function (e) {
+                map_c8d50750b3004dfd81b1b4494d0ce815.fitBounds(e.target.getBounds());
+            }
+        });
+    };
+
+
+
+
 </script>

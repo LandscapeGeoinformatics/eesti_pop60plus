@@ -10,9 +10,9 @@
 
 ## Attribution
 
-Source code is available under MIT License.
+Source code is available under [MIT License](https://opensource.org/licenses/MIT).
 
-Data and visualisations are made available under CC-BY 4.0 Creative Commons Attribution license.
+Data and visualisations are made available under [CC-BY 4.0 Creative Commons - Attribution license](https://creativecommons.org/licenses/by/4.0/).
 
 Autor: [Landscape Geoinformatics töörühm](https://github.com/LandscapeGeoinformatics/eesti_pop60plus), Geograafia Osakond, Tartu Ülikool
 
