@@ -8,17 +8,17 @@
         L_DISABLE_3D = false;
     </script>
 
-    <meta property="og:title" content="Eestis 60-aastaste ja vanemate osakaal rahvastikust">
+    <meta property="og:title" content="60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga ja COVID-19 nakatunud maakonniti">
     <meta property="og:description"
-        content="60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga">
+        content="60-aastaste ja vanemate ning COVID-19 nakatunute osakaal rahvastikust (%)">
     <meta property="og:image" content="https://landscapegeoinformatics.github.io/eesti_pop60plus/thumb.png">
     <meta property="og:url" content="https://landscapegeoinformatics.github.io/eesti_pop60plus/index.html">
 
-    <meta name="twitter:title" content="Eestis 60-aastaste ja vanemate osakaal rahvastikust ">
+    <meta name="twitter:title" content="60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga ja COVID-19 nakatunud maakonniti ">
     <meta name="twitter:description"
-        content="60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga">
+        content="60-aastaste ja vanemate ning COVID-19 nakatunute osakaal rahvastikust (%)">
     <meta name="twitter:image" content="https://landscapegeoinformatics.github.io/eesti_pop60plus/thumb.png">
-    <meta name="twitter:card" content="60-aastaste ja vanemate osakaal rahvastikust (%)">
+    <meta name="twitter:card" content="60-aastaste ja vanemate ning COVID-19 nakatunute osakaal rahvastikust (%)">
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -145,7 +145,7 @@
 
     <div class="container-fluid" role="main">
         <div class="page-header">
-            <h2>60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga</h2>
+            <h2>60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga ja COVID-19 nakatunud maakonniti</h2>
         </div>
 
         <div class="row" style="padding: 4px 10px;">
@@ -162,11 +162,19 @@
         <div class="row">
             <div class="col-md-6">
                 <p>
-                    Kaart: Alexander Kmoch ja Evelyn Uuemaa, <a href="https://www.geograafia.ut.ee/et"
+                    <a href="https://github.com/LandscapeGeoinformatics/eesti_pop60plus"
+                        target="blank">Kaart</a>: Alexander Kmoch ja Evelyn Uuemaa, <a href="https://geograafia.ut.ee/"
                         target="blank">Tartu Ülikooli geograafia osakond</a>
                 </p>
                 <p>
-                    Andmed: <a href="https://www.stat.ee/" target='blank'>Eesti Statistikaamet</a>
+                    Rahvastikuandmed: <a href="https://www.stat.ee/" target='blank'>Eesti Statistikaamet</a>
+                </p>
+                <p>
+                    COVID-19 andmed: <a href="https://www.terviseamet.ee/et/koroonaviirus/koroonakaart" target="blank">Eesti Terviseamet</a>
+                    <br />Kahjuks on hetkel saadaolevad andmed staatilised, kuna Eesti Terviseameti lehelt ei ole võimalik algandmeid dünaamiliselt saada (ei ole avaandmed).
+                </p>
+                <p>
+                    Baaskaart: Leaflet, OpenStreetMap contributors, CartoDB
                 </p>
             </div>
         </div>
@@ -359,7 +367,7 @@
     // '60yle', '60yle_prop','covid19_03', 'co_19_03_p'
     info2.update = function (props) {
         this._div.innerHTML = (props ? '<b>' + props.NIMI + '</b><br />' +
-            '60-aastaste ja vanemate arv: ' + props['60yle'] + '<br />60-aastaste ja vanemate osakaal rahvastikust: ' + props['60yle_prop'].toFixed(1) + '%<br />' + 'covid nakatunute arv: ' + props['covid19_03'] + '<br />covid nakatunute osakaal rahvastikust: ' + props['co_19_03_p'].toFixed(2) + '%<br />'
+            '60-aastaste ja vanemate arv: ' + props['60yle'] + '<br />60-aastaste ja vanemate osakaal rahvastikust: ' + props['60yle_prop'].toFixed(1) + '%<br />' + 'COVID-19 nakatunute arv: ' + props['covid19_03'] + '<br />COVID-19 nakatunute osakaal rahvastikust: ' + props['co_19_03_p'].toFixed(2) + '%<br />'
             : 'liigu hiirega KOV-ile');
     };
 
@@ -465,14 +473,14 @@ color_map_4a6fa4d9413945c48a8886eddf64e79f.g.selectAll("rect")
 color_map_4a6fa4d9413945c48a8886eddf64e79f.g.call(color_map_4a6fa4d9413945c48a8886eddf64e79f.xAxis).append("text")
 .attr("class", "caption")
 .attr("y", 21)
-.text('covid absolut number');
+.text('COVID-19 nakatunute arv');
 
     var layer_control_2d7049c8541348b188c6f7bbe7f4fe11 = {
         base_layers : {
             "cartodbpositron" : tile_layer_078c1ae2a4a74d7ebeb0d975f37348b6,
         },
         overlays :  {
-            "covid osakaal rahvastikust" : choropleth_c68dc6475f89419587a2eb65ec9dd440,
+            "COVID-19 nakatunute arv" : choropleth_c68dc6475f89419587a2eb65ec9dd440,
         },
     };
     L.control.layers(
