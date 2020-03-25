@@ -18,8 +18,9 @@ Autor: [Landscape Geoinformatics töörühm](https://github.com/LandscapeGeoinfo
 
 Rahvastikuandmed: [Eesti Statikaamet](https://www.stat.ee/)
 
-COVID-19 andmed: [Eesti Terviseamet](https://www.terviseamet.ee/et/koroonaviirus/koroonakaart)
+COVID-19 andmed:
 
-Kahjuks on hetkel saadaolevad andmed staatilised, kuna Eesti Terviseameti lehelt ei ole võimalik algandmeid dünaamiliselt saada (ei ole avaandmed).
+- [Eesti Terviseamet | Koroonakaart](https://www.terviseamet.ee/et/koroonaviirus/koroonakaart)
+- [Andmed koroonaviiruse hetkeolukorra kohta (Eesti Avaandmete Portaal)](https://opendata.riik.ee/andmehulgad/andmed-koroonaviiruse-hetkeolukorra-kohta/)
 
 Baaskaart: Leaflet, OpenStreetMap contributors, CartoDB
