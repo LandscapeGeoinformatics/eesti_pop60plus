@@ -24,7 +24,7 @@ def get_excel_data(path_to_excel):
     wb = load_workbook(filename = path_to_excel, read_only=True)
     print(wb.sheetnames)
     ws = wb['Sheet1']
-    for x in range(3,21):
+    for x in range(3,17):
         data_point = {}
         data_point['NIMI'] = ws.cell(row=x, column=1).value
         data_point['covid_arv'] = ws.cell(row=x, column=3).value

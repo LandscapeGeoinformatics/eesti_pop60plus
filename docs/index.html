@@ -146,7 +146,7 @@
     <div class="container-fluid" role="main">
         <div class="page-header">
             <h2>60 ja vanemate inimeste osakaal rahvastikust Eesti KOV-ides 2019. aasta seisuga ja COVID-19 nakatunud
-                maakonniti 25.03.2020</h2>
+                maakonniti 30.03.2020</h2>
         </div>
 
         <div class="row" style="padding: 4px 10px;">
@@ -479,19 +479,25 @@
         // console.log(`length of base_colors ${base_colors.length}`)
         var color_range_filled_with500 = [];
 
-        function select_color(acc_value) {
-            var smaller_class_bound = 0;
-            var larger_class_bound = data_domain_tick_range.lenght - 1;
-            data_domain_tick_range.forEach(function(col_v, idx) {
-                // console.log(`acc val: ${acc_value} col_v ${col_v} ${idx} base_colors[${base_colors[idx]}]`);
-                if ( col_v < acc_value ) {
-                    smaller_class_bound = idx;
+        function select_color(acc_value, log_map) {
+            var color_index = 0;
+
+            for (x=0; x < base_colors.length; x++) {
+                const t1 = data_domain_tick_range[x];
+                const t2 = data_domain_tick_range[x+1];
+                
+                if (acc_value >= t1 && acc_value < t2) {
+                    color_index = x;
                 } else {
-                    larger_class_bound = idx;
+                    if (x===base_colors.length-1 && acc_value >= t2) {
+                        color_index = x;
+                    }
                 }
-            });
-            // console.log(`acc val: ${acc_value} class_bounds ${smaller_class_bound} ${larger_class_bound}`);
-            return base_colors[smaller_class_bound];
+            }
+            if (log_map) {
+                console.log(`acc_val: ${acc_value} color_index ${color_index} | ${data_domain_tick_range[color_index]} ${base_colors[color_index]}`);
+            }
+            return base_colors[color_index];
         }
 
         const step_width500 = ranges_v / 499;
@@ -518,18 +524,9 @@
         // console.log(`length of color_range ${color_range.length}`)
 
         function geo_json_faaa08e2550543ddb73cf1eb205d49b3_styler(feature) {
-            const fc = select_color(feature.properties['co_20_03_p']);
+            const fc = select_color(feature.properties['co_20_03_p'], false);
             return {"color": "black", "fillColor": fc, "fillOpacity": 0.6, "opacity": 0.4, "weight": 1};
-            /*
-            switch(feature.id) {
-                case "0": 
-                    return {"color": "black", "fillColor": "#bd0026", "fillOpacity": 0.6, "opacity": 0.4, "weight": 1};
-                case "13": 
-                    return {"color": "black", "fillColor": "#fecc5c", "fillOpacity": 0.6, "opacity": 0.4, "weight": 1};
-                default:
-                    return {"color": "black", "fillColor": "#ffffb2", "fillOpacity": 0.6, "opacity": 0.4, "weight": 1};
-            }
-            */
+
         }
         
         var geo_json_faaa08e2550543ddb73cf1eb205d49b3 = L.geoJson(null, {
@@ -574,7 +571,8 @@
         .scale(color_map_0673c4faed59478380e1417e787da7c4.x)
         .orient("top")
         .tickSize(1)
-        .tickValues(data_domain_tick_range);
+        .tickValues(data_domain_tick_range)
+        .tickFormat(d3.format(".1f"));
 
         color_map_0673c4faed59478380e1417e787da7c4.svg = d3.select(".legend2.leaflet-control").append("svg")
         .attr("id", 'legend2')

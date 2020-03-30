@@ -2,23 +2,23 @@
     "features": [
         {
             "NIMI": "Harju maakond",
-            "covid_arv": 141
+            "covid_arv": 238
         },
         {
             "NIMI": "Hiiu maakond",
-            "covid_arv": 2
+            "covid_arv": 6
         },
         {
             "NIMI": "Ida-Viru maakond",
-            "covid_arv": 8
+            "covid_arv": 19
         },
         {
             "NIMI": "J\u00f5geva maakond",
-            "covid_arv": 1
+            "covid_arv": 3
         },
         {
             "NIMI": "J\u00e4rva maakond",
-            "covid_arv": 1
+            "covid_arv": 4
         },
         {
             "NIMI": "L\u00e4\u00e4ne maakond",
@@ -26,7 +26,7 @@
         },
         {
             "NIMI": "L\u00e4\u00e4ne-Viru maakond",
-            "covid_arv": 2
+            "covid_arv": 6
         },
         {
             "NIMI": "P\u00f5lva maakond",
@@ -34,43 +34,27 @@
         },
         {
             "NIMI": "P\u00e4rnu maakond",
-            "covid_arv": 24
+            "covid_arv": 42
         },
         {
             "NIMI": "Rapla maakond",
-            "covid_arv": 2
-        },
-        {
-            "NIMI": "RR-is isikukood puudub",
-            "covid_arv": 8
+            "covid_arv": 10
         },
         {
             "NIMI": "Saare maakond",
-            "covid_arv": 116
+            "covid_arv": 258
         },
         {
             "NIMI": "Tartu maakond",
-            "covid_arv": 34
+            "covid_arv": 47
         },
         {
             "NIMI": "Valga maakond",
-            "covid_arv": 1
-        },
-        {
-            "NIMI": "VALISRIIK",
-            "covid_arv": null
+            "covid_arv": 4
         },
         {
             "NIMI": "Viljandi maakond",
-            "covid_arv": 3
-        },
-        {
-            "NIMI": "V\u00f5ru maakond",
-            "covid_arv": 51
-        },
-        {
-            "NIMI": "Puudub info",
-            "covid_arv": 4
+            "covid_arv": 6
         }
     ]
 }
